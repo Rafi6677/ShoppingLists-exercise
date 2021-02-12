@@ -1,7 +1,7 @@
 package com.example.shoppinglists.utils;
 
 import androidx.room.TypeConverter;
-import com.example.shoppinglists.data.model.Product;
+import com.example.shoppinglists.data.db.model.Product;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

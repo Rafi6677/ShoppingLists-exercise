@@ -4,6 +4,6 @@ import com.example.shoppinglists.domain.repository.ShoppingListsRepository
 
 class GetSpecificShoppingListUseCase(private val shoppingListsRepository: ShoppingListsRepository) {
 
-    fun execute() = shoppingListsRepository.getSpecificShoppingList()
+    suspend fun execute(id: Int) = shoppingListsRepository.getSpecificShoppingList(id)
 
 }

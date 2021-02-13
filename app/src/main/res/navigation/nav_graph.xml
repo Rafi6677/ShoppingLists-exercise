@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/shoppingListsFragment">
+
+    <fragment
+        android:id="@+id/shoppingListsFragment"
+        android:name="com.example.shoppinglists.presentation.view.ShoppingListsFragment"
+        android:label="fragment_shopping_lists"
+        tools:layout="@layout/fragment_shopping_lists">
+        <action
+            android:id="@+id/action_shoppingListsFragment_to_shoppingListDetailsFragment"
+            app:destination="@id/shoppingListDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shoppingListDetailsFragment"
+        android:name="com.example.shoppinglists.presentation.view.ShoppingListDetailsFragment"
+        android:label="fragment_shopping_lists_details"
+        tools:layout="@layout/fragment_shopping_list_details"/>
+    <fragment
+        android:id="@+id/archivedShoppingListsFragment"
+        android:name="com.example.shoppinglists.presentation.view.ArchivedShoppingListsFragment"
+        android:label="fragment_archived_shopping_lists"
+        tools:layout="@layout/fragment_archived_shopping_lists">
+        <action
+            android:id="@+id/action_archivedShoppingListsFragment_to_shoppingListDetailsFragment"
+            app:destination="@id/shoppingListDetailsFragment" />
+    </fragment>
+</navigation>

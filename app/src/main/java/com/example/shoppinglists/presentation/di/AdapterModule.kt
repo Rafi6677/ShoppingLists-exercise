@@ -1,6 +1,6 @@
 package com.example.shoppinglists.presentation.di
 
-import com.example.shoppinglists.presentation.adapter.ProductsAdapter
+import com.example.shoppinglists.presentation.adapter.ShoppingListDetailsAdapter
 import com.example.shoppinglists.presentation.adapter.ShoppingListsAdapter
 import dagger.Module
 import dagger.Provides
@@ -20,8 +20,8 @@ class AdapterModule {
 
     @Singleton
     @Provides
-    fun provideProductsAdapter(): ProductsAdapter {
-        return ProductsAdapter()
+    fun provideShoppingListDetailsAdapter(): ShoppingListDetailsAdapter {
+        return ShoppingListDetailsAdapter()
     }
 
 }

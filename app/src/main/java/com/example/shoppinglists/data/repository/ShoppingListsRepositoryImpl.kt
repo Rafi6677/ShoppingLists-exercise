@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.shoppinglists.data.db.model.ShoppingList
 import com.example.shoppinglists.data.repository.datasource.ShoppingListsDataSource
 import com.example.shoppinglists.domain.repository.ShoppingListsRepository
+import com.example.shoppinglists.utils.Resource
 import java.lang.Exception
 
 class ShoppingListsRepositoryImpl(
@@ -22,8 +23,8 @@ class ShoppingListsRepositoryImpl(
         dataSource.updateShoppingListToDB(shoppingList)
     }
 
-    override suspend fun getArchivedShoppingLists(): List<ShoppingList> {
-        lateinit var archivedShoppingLists: List<ShoppingList>
+    override suspend fun getArchivedShoppingLists(): List<ShoppingList>? {
+        var archivedShoppingLists: List<ShoppingList>? = null
 
         try {
             archivedShoppingLists = dataSource.getArchivedShoppingListsFromDB()
@@ -34,8 +35,8 @@ class ShoppingListsRepositoryImpl(
         return archivedShoppingLists
     }
 
-    override suspend fun getShoppingLists(): List<ShoppingList> {
-        lateinit var shoppingLists: List<ShoppingList>
+    override suspend fun getShoppingLists(): List<ShoppingList>? {
+        var shoppingLists: List<ShoppingList>? = null
 
         try {
             shoppingLists = dataSource.getShoppingListsFromDB()

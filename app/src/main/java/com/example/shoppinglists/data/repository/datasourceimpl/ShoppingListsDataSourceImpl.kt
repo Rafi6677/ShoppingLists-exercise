@@ -3,6 +3,7 @@ package com.example.shoppinglists.data.repository.datasourceimpl
 import com.example.shoppinglists.data.db.dao.ShoppingListsDAO
 import com.example.shoppinglists.data.db.model.ShoppingList
 import com.example.shoppinglists.data.repository.datasource.ShoppingListsDataSource
+import com.example.shoppinglists.utils.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,9 +29,7 @@ class ShoppingListsDataSourceImpl(private val dao: ShoppingListsDAO) : ShoppingL
     }
 
     override suspend fun getArchivedShoppingListsFromDB(): List<ShoppingList> = dao.getArchivedShoppingLists()
-
     override suspend fun getShoppingListsFromDB(): List<ShoppingList> = dao.getShoppingLists()
-
     override suspend fun getSpecificShoppingListFromDB(id: Int): ShoppingList = dao.getSpecificShoppingList(id)
 
 }

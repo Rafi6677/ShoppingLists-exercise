@@ -18,7 +18,11 @@
         android:id="@+id/shoppingListDetailsFragment"
         android:name="com.example.shoppinglists.presentation.view.ShoppingListDetailsFragment"
         android:label="fragment_shopping_lists_details"
-        tools:layout="@layout/fragment_shopping_list_details"/>
+        tools:layout="@layout/fragment_shopping_list_details">
+        <argument
+            android:name="selected_shopping_list"
+            app:argType="com.example.shoppinglists.data.db.model.ShoppingList" />
+    </fragment>
     <fragment
         android:id="@+id/archivedShoppingListsFragment"
         android:name="com.example.shoppinglists.presentation.view.ArchivedShoppingListsFragment"

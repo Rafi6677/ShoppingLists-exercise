@@ -3,4 +3,7 @@
     <string name="archived_shopping_lists">Archived Shopping Lists</string>
     <string name="no_shopping_lists">You don\'t have any shopping list saved</string>
     <string name="no_archived_shopping_lists">You don\'t have any archived shopping list saved</string>
+    <string name="shopping_list">Shopping List</string>
+    <string name="product">Product</string>
+    <string name="groceries_done">Groceries done: </string>
 </resources>

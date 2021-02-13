@@ -2,6 +2,7 @@ package com.example.shoppinglists.data.db.dao
 
 import androidx.room.*
 import com.example.shoppinglists.data.db.model.ShoppingList
+import com.example.shoppinglists.utils.Resource
 
 @Dao
 interface ShoppingListsDAO {
@@ -18,7 +19,7 @@ interface ShoppingListsDAO {
     @Query("SELECT * FROM shopping_lists WHERE is_archive = 1 ORDER BY timestamp DESC")
     suspend fun getArchivedShoppingLists(): List<ShoppingList>
 
-    @Query("SELECT * FROM shopping_lists ORDER BY timestamp DESC")
+    @Query("SELECT * FROM shopping_lists WHERE is_archive = 0 ORDER BY timestamp DESC")
     suspend fun getShoppingLists(): List<ShoppingList>
 
     @Query("SELECT * FROM shopping_lists WHERE id LIKE :shoppingListId")

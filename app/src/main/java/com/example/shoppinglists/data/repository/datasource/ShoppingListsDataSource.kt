@@ -1,6 +1,7 @@
 package com.example.shoppinglists.data.repository.datasource
 
 import com.example.shoppinglists.data.db.model.ShoppingList
+import com.example.shoppinglists.utils.Resource
 
 interface ShoppingListsDataSource {
 

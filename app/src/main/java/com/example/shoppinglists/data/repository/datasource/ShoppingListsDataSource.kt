@@ -2,7 +2,6 @@ package com.example.shoppinglists.data.repository.datasource
 
 import androidx.lifecycle.LiveData
 import com.example.shoppinglists.data.db.model.ShoppingList
-import com.example.shoppinglists.utils.Resource
 
 interface ShoppingListsDataSource {
 

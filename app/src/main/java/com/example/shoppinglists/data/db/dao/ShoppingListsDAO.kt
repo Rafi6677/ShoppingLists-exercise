@@ -3,7 +3,6 @@ package com.example.shoppinglists.data.db.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.shoppinglists.data.db.model.ShoppingList
-import com.example.shoppinglists.utils.Resource
 
 @Dao
 interface ShoppingListsDAO {

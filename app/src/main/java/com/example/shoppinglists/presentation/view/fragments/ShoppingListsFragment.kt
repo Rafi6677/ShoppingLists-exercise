@@ -1,4 +1,4 @@
-package com.example.shoppinglists.presentation.view
+package com.example.shoppinglists.presentation.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,14 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shoppinglists.R
-import com.example.shoppinglists.presentation.ShoppingListDetailsActivity
+import com.example.shoppinglists.presentation.view.activities.ShoppingListDetailsActivity
 import com.example.shoppinglists.databinding.FragmentShoppingListsBinding
-import com.example.shoppinglists.presentation.ShoppingListsActivity
+import com.example.shoppinglists.presentation.view.activities.HomeActivity
 import com.example.shoppinglists.presentation.adapter.ShoppingListsAdapter
 import com.example.shoppinglists.presentation.enums.ShoppingListOperationType
 import com.example.shoppinglists.presentation.viewmodel.ShoppingListsViewModel
@@ -27,7 +25,7 @@ class ShoppingListsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        (activity as ShoppingListsActivity).setActionBarTitle(
+        (activity as HomeActivity).setActionBarTitle(
             resources.getString(R.string.app_name)
         )
     }
@@ -44,12 +42,17 @@ class ShoppingListsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentShoppingListsBinding.bind(view)
-        viewModel = (activity as ShoppingListsActivity).viewModel
-        adapter = (activity as ShoppingListsActivity).adapter
+        viewModel = (activity as HomeActivity).viewModel
+        adapter = (activity as HomeActivity).adapter
 
         adapter.setOnItemClickListener {
-            val intent = Intent(activity, ShoppingListDetailsActivity::class.java)
-            intent.putExtra("shopping_list_operation_type", ShoppingListOperationType.ShowDetails.value)
+            val bundle = Bundle().apply {
+                putInt("shopping_list_operation_type", ShoppingListOperationType.ShowDetails.value)
+                putSerializable("shopping_list", it)
+            }
+            val intent = Intent(activity, ShoppingListDetailsActivity::class.java).apply {
+                putExtras(bundle)
+            }
             startActivity(intent)
         }
 

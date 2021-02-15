@@ -1,20 +1,20 @@
-package com.example.shoppinglists.presentation
+package com.example.shoppinglists.presentation.view.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.shoppinglists.databinding.ActivityMainBinding
+import com.example.shoppinglists.databinding.ActivityHomeBinding
 import com.example.shoppinglists.presentation.adapter.ShoppingListsAdapter
 import com.example.shoppinglists.presentation.viewmodel.ShoppingListsViewModel
 import com.example.shoppinglists.presentation.viewmodel.ShoppingListsViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ShoppingListsActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     @Inject
     lateinit var factory: ShoppingListsViewModelFactory
@@ -22,12 +22,12 @@ class ShoppingListsActivity : AppCompatActivity() {
     lateinit var adapter: ShoppingListsAdapter
 
     lateinit var viewModel: ShoppingListsViewModel
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.navigation.setupWithNavController(

@@ -1,5 +1,6 @@
-package com.example.shoppinglists.presentation
+package com.example.shoppinglists.presentation.view.activities
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -35,9 +36,12 @@ class ShoppingListDetailsActivity : AppCompatActivity() {
     private lateinit var viewModel: ShoppingListDetailsViewModel
     private lateinit var binding: ActivityShoppingListDetailsBinding
     private lateinit var shoppingListOperationType: ShoppingListOperationType
+    private lateinit var shoppingList: ShoppingList
     
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.setDefaultDisplayHomeAsUpEnabled(true)
 
         binding = ActivityShoppingListDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -45,15 +49,7 @@ class ShoppingListDetailsActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, factory)
                 .get(ShoppingListDetailsViewModel::class.java)
 
-        shoppingListOperationType = ShoppingListOperationType.setByValue(
-                intent.getIntExtra("shopping_list_operation_type", 0)
-        )!!
-
-        adapter.setOperationType(shoppingListOperationType)
-
-        manageAddFirstProductInfoVisibility()
-        initRecyclerView()
-        initButtons()
+        initData()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -75,9 +71,22 @@ class ShoppingListDetailsActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onBackPressed() {
-        adapter.setProductsList(null)
-        finish()
+    private fun initData() {
+        val bundle = intent.extras!!
+        shoppingListOperationType = ShoppingListOperationType.setByValue(
+            bundle.getInt("shopping_list_operation_type")
+        )!!
+
+        adapter.setOperationType(shoppingListOperationType)
+
+        if (shoppingListOperationType == ShoppingListOperationType.ShowDetails) {
+            shoppingList = bundle.getSerializable("shopping_list") as ShoppingList
+            adapter.setProductsList(shoppingList.productsList)
+        }
+
+        manageAddFirstProductInfoVisibility()
+        initRecyclerView()
+        initButtons()
     }
 
     private fun manageAddFirstProductInfoVisibility() {
@@ -130,8 +139,6 @@ class ShoppingListDetailsActivity : AppCompatActivity() {
                 .show()
         } else {
             val product = Product(name, quantity, false)
-
-
             adapter.addProduct(product)
             manageAddFirstProductInfoVisibility()
             adapter.notifyDataSetChanged()
@@ -139,8 +146,9 @@ class ShoppingListDetailsActivity : AppCompatActivity() {
     }
 
     private fun saveShoppingList() {
-        val products = ArrayList<Product>()
-        products.addAll(adapter.getProductsList())
+        val products = ArrayList<Product>().apply {
+            addAll(adapter.getProductsList())
+        }
 
         if (products.isEmpty()) {
             Toast.makeText(this, resources.getString(R.string.empty_shopping_list), Toast.LENGTH_SHORT)
@@ -152,7 +160,6 @@ class ShoppingListDetailsActivity : AppCompatActivity() {
         val shoppingList = ShoppingList(0, "title", products, timestamp, false)
 
         viewModel.saveShoppingList(shoppingList)
-        adapter.setProductsList(null)
         finish()
     }
 

@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import com.example.shoppinglists.data.db.dao.ShoppingListsDAO
 import com.example.shoppinglists.data.db.model.ShoppingList
 import com.example.shoppinglists.data.repository.datasource.ShoppingListsDataSource
-import com.example.shoppinglists.utils.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

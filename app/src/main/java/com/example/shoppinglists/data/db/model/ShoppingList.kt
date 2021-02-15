@@ -9,7 +9,6 @@ import java.io.Serializable
 
 @Entity(tableName = "shopping_lists")
 data class ShoppingList (
-
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id: Int,
@@ -22,5 +21,4 @@ data class ShoppingList (
     val timestamp: Long,
     @ColumnInfo(name = "is_archive")
     val isArchive: Boolean
-
 ): Serializable

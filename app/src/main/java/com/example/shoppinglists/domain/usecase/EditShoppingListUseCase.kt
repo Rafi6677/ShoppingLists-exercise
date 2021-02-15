@@ -5,7 +5,6 @@ import com.example.shoppinglists.domain.repository.ShoppingListsRepository
 
 class EditShoppingListUseCase(private val shoppingListsRepository: ShoppingListsRepository) {
 
-    suspend fun execute(shoppingList: ShoppingList) = shoppingListsRepository
-        .editShoppingList(shoppingList)
+    suspend fun execute(shoppingList: ShoppingList) = shoppingListsRepository.editShoppingList(shoppingList)
 
 }

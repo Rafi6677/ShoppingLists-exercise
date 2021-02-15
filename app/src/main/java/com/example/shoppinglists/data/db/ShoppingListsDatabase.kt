@@ -8,10 +8,8 @@ import com.example.shoppinglists.data.db.model.Product
 import com.example.shoppinglists.data.db.model.ShoppingList
 import com.example.shoppinglists.utils.DataConverter
 
-@Database(entities = [
-        Product::class,
-        ShoppingList::class
-    ],
+@Database(
+    entities = [ShoppingList::class],
     version = 1,
     exportSchema = false
 )

@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.shoppinglists.R
-import com.example.shoppinglists.presentation.MainActivity
+import com.example.shoppinglists.presentation.ShoppingListsActivity
 
 class ArchivedShoppingListsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        (activity as MainActivity).setActionBarTitle(
+        (activity as ShoppingListsActivity).setActionBarTitle(
             resources.getString(R.string.archived_shopping_lists)
         )
     }

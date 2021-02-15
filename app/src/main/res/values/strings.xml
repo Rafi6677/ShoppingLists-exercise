@@ -6,4 +6,11 @@
     <string name="shopping_list">Shopping List</string>
     <string name="product">Product</string>
     <string name="groceries_done">Groceries done: </string>
+    <string name="title">Shopping list\'s title</string>
+    <string name="add_first_product">Add first product to the list</string>
+    <string name="set_title">Set shopping list\'s title</string>
+    <string name="new_product">New product</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="empty_shopping_list">Shopping list is empty</string>
 </resources>

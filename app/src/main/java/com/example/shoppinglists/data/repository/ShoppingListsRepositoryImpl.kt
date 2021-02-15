@@ -1,6 +1,7 @@
 package com.example.shoppinglists.data.repository
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.example.shoppinglists.data.db.model.ShoppingList
 import com.example.shoppinglists.data.repository.datasource.ShoppingListsDataSource
 import com.example.shoppinglists.domain.repository.ShoppingListsRepository
@@ -23,8 +24,8 @@ class ShoppingListsRepositoryImpl(
         dataSource.updateShoppingListToDB(shoppingList)
     }
 
-    override suspend fun getArchivedShoppingLists(): List<ShoppingList>? {
-        var archivedShoppingLists: List<ShoppingList>? = null
+    override fun getArchivedShoppingLists(): LiveData<List<ShoppingList>> {
+        /*var archivedShoppingLists: LiveData<List<ShoppingList>>? = null
 
         try {
             archivedShoppingLists = dataSource.getArchivedShoppingListsFromDB()
@@ -32,11 +33,12 @@ class ShoppingListsRepositoryImpl(
             Log.i("ExceptionTag", e.message.toString())
         }
 
-        return archivedShoppingLists
+        return archivedShoppingLists*/
+        return dataSource.getArchivedShoppingListsFromDB()
     }
 
-    override suspend fun getShoppingLists(): List<ShoppingList>? {
-        var shoppingLists: List<ShoppingList>? = null
+    override fun getShoppingLists(): LiveData<List<ShoppingList>> {
+        /*var shoppingLists: LiveData<List<ShoppingList>>? = null
 
         try {
             shoppingLists = dataSource.getShoppingListsFromDB()
@@ -44,10 +46,11 @@ class ShoppingListsRepositoryImpl(
             Log.i("ExceptionTag", e.message.toString())
         }
 
-        return shoppingLists
+        return shoppingLists*/
+        return dataSource.getShoppingListsFromDB()
     }
 
-    override suspend fun getSpecificShoppingList(id: Int): ShoppingList {
+    override fun getSpecificShoppingList(id: Int): ShoppingList {
         lateinit var shoppingList: ShoppingList
 
         try {

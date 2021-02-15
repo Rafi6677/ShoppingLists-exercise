@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class ShoppingListsActivity : AppCompatActivity() {
 
     @Inject
     lateinit var factory: ShoppingListsViewModelFactory

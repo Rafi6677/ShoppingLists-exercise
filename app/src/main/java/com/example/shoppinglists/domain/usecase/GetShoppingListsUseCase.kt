@@ -6,6 +6,6 @@ import com.example.shoppinglists.utils.Resource
 
 class GetShoppingListsUseCase(private val shoppingListsRepository: ShoppingListsRepository) {
 
-    suspend fun execute() = shoppingListsRepository.getShoppingLists()
+    fun execute() = shoppingListsRepository.getShoppingLists()
 
 }

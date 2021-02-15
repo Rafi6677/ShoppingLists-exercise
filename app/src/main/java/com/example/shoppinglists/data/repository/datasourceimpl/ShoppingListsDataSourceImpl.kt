@@ -1,5 +1,6 @@
 package com.example.shoppinglists.data.repository.datasourceimpl
 
+import androidx.lifecycle.LiveData
 import com.example.shoppinglists.data.db.dao.ShoppingListsDAO
 import com.example.shoppinglists.data.db.model.ShoppingList
 import com.example.shoppinglists.data.repository.datasource.ShoppingListsDataSource
@@ -28,8 +29,8 @@ class ShoppingListsDataSourceImpl(private val dao: ShoppingListsDAO) : ShoppingL
         }
     }
 
-    override suspend fun getArchivedShoppingListsFromDB(): List<ShoppingList> = dao.getArchivedShoppingLists()
-    override suspend fun getShoppingListsFromDB(): List<ShoppingList> = dao.getShoppingLists()
-    override suspend fun getSpecificShoppingListFromDB(id: Int): ShoppingList = dao.getSpecificShoppingList(id)
+    override fun getArchivedShoppingListsFromDB(): LiveData<List<ShoppingList>> = dao.getArchivedShoppingLists()
+    override fun getShoppingListsFromDB(): LiveData<List<ShoppingList>> = dao.getShoppingLists()
+    override fun getSpecificShoppingListFromDB(id: Int): ShoppingList = dao.getSpecificShoppingList(id)
 
 }

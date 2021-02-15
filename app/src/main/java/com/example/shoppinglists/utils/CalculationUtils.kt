@@ -1,8 +1,11 @@
 package com.example.shoppinglists.utils
 
+import android.annotation.SuppressLint
 import com.example.shoppinglists.data.db.model.ShoppingList
+import java.text.SimpleDateFormat
+import java.util.*
 
-object DataCalculations {
+object CalculationUtils {
 
     fun countBoughtProducts(shoppingList: ShoppingList): Int {
         var boughtProducts = 0
@@ -14,6 +17,14 @@ object DataCalculations {
         }
 
         return boughtProducts
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun formatDateFromTimestampToString(timestamp: Long): String {
+        val formatter = SimpleDateFormat("dd-MM-yyyy HH:mm")
+        val date = Date(timestamp)
+
+        return formatter.format(date)
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.shoppinglists.data.db.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.shoppinglists.data.db.model.ShoppingList
 import com.example.shoppinglists.utils.Resource
@@ -17,12 +18,12 @@ interface ShoppingListsDAO {
     suspend fun deleteShoppingList(shoppingList: ShoppingList): Int
 
     @Query("SELECT * FROM shopping_lists WHERE is_archive = 1 ORDER BY timestamp DESC")
-    suspend fun getArchivedShoppingLists(): List<ShoppingList>
+    fun getArchivedShoppingLists(): LiveData<List<ShoppingList>>
 
     @Query("SELECT * FROM shopping_lists WHERE is_archive = 0 ORDER BY timestamp DESC")
-    suspend fun getShoppingLists(): List<ShoppingList>
+    fun getShoppingLists(): LiveData<List<ShoppingList>>
 
     @Query("SELECT * FROM shopping_lists WHERE id LIKE :shoppingListId")
-    suspend fun getSpecificShoppingList(shoppingListId: Int): ShoppingList
+    fun getSpecificShoppingList(shoppingListId: Int): ShoppingList
 
 }

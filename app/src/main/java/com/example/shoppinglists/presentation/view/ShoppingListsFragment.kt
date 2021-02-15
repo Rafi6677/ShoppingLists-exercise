@@ -1,21 +1,22 @@
 package com.example.shoppinglists.presentation.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shoppinglists.R
+import com.example.shoppinglists.presentation.ShoppingListDetailsActivity
 import com.example.shoppinglists.databinding.FragmentShoppingListsBinding
-import com.example.shoppinglists.presentation.MainActivity
+import com.example.shoppinglists.presentation.ShoppingListsActivity
 import com.example.shoppinglists.presentation.adapter.ShoppingListsAdapter
+import com.example.shoppinglists.presentation.enums.ShoppingListOperationType
 import com.example.shoppinglists.presentation.viewmodel.ShoppingListsViewModel
-import com.example.shoppinglists.utils.Resource
 
 class ShoppingListsFragment : Fragment() {
 
@@ -26,7 +27,7 @@ class ShoppingListsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        (activity as MainActivity).setActionBarTitle(
+        (activity as ShoppingListsActivity).setActionBarTitle(
             resources.getString(R.string.app_name)
         )
     }
@@ -43,21 +44,18 @@ class ShoppingListsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentShoppingListsBinding.bind(view)
-        viewModel = (activity as MainActivity).viewModel
-        adapter = (activity as MainActivity).adapter
+        viewModel = (activity as ShoppingListsActivity).viewModel
+        adapter = (activity as ShoppingListsActivity).adapter
 
         adapter.setOnItemClickListener {
-            val bundle = Bundle().apply {
-                putSerializable("selected_shopping_list", it)
-            }
-            findNavController().navigate(
-                R.id.action_shoppingListsFragment_to_shoppingListDetailsFragment,
-                bundle
-            )
+            val intent = Intent(activity, ShoppingListDetailsActivity::class.java)
+            intent.putExtra("shopping_list_operation_type", ShoppingListOperationType.ShowDetails.value)
+            startActivity(intent)
         }
 
         initRecyclerView()
         displayShoppingLists()
+        initButtons()
     }
 
     private fun initRecyclerView() {
@@ -67,27 +65,33 @@ class ShoppingListsFragment : Fragment() {
         )
 
         binding.shoppingListsRecyclerView.apply {
-            adapter = this.adapter
+            adapter = this@ShoppingListsFragment.adapter
             layoutManager = LinearLayoutManager(activity)
             addItemDecoration(divider)
         }
     }
 
     private fun displayShoppingLists() {
-        hideNoDataInfo()
         showProgressBar()
 
-        val response = viewModel.getShoppingLists()
-
-        response.observe(viewLifecycleOwner, Observer {
+        viewModel.shoppingLists.observe(viewLifecycleOwner, {
             if (it != null && it.isNotEmpty()) {
                 adapter.differ.submitList(it)
                 hideProgressBar()
+                hideNoDataInfo()
             } else {
                 hideProgressBar()
                 showNoDataInfo()
             }
         })
+    }
+
+    private fun initButtons() {
+        binding.addButton.setOnClickListener {
+            val intent = Intent(activity, ShoppingListDetailsActivity::class.java)
+            intent.putExtra("shopping_list_operation_type", ShoppingListOperationType.Add.value)
+            startActivity(intent)
+        }
     }
 
     private fun showProgressBar() {

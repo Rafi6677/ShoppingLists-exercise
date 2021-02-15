@@ -23,9 +23,11 @@ class ShoppingListsViewModel(
     private val deleteShoppingListUseCase: DeleteShoppingListUseCase
 ) : AndroidViewModel(app) {
 
-    fun getShoppingLists() = liveData {
+    /*fun getShoppingLists() = liveData {
         val shoppingLists = getShoppingListsUseCase.execute()
         emit(shoppingLists)
-    }
+    }*/
+
+    val shoppingLists = getShoppingListsUseCase.execute()
 
 }

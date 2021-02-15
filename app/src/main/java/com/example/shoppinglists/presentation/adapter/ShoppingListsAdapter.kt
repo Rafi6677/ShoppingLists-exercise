@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shoppinglists.data.db.model.ShoppingList
 import com.example.shoppinglists.databinding.ItemShoppingListBinding
-import com.example.shoppinglists.utils.DataCalculations
+import com.example.shoppinglists.utils.CalculationUtils
 
 class ShoppingListsAdapter : RecyclerView.Adapter<ShoppingListsAdapter.ShoppingListsViewHolder>() {
 
@@ -56,9 +56,10 @@ class ShoppingListsAdapter : RecyclerView.Adapter<ShoppingListsAdapter.ShoppingL
         @SuppressLint("SetTextI18n")
         fun bind(shoppingList: ShoppingList) {
             val allProductsQuantity = shoppingList.productsList.size
-            val boughtProductsQuantity = DataCalculations.countBoughtProducts(shoppingList)
+            val boughtProductsQuantity = CalculationUtils.countBoughtProducts(shoppingList)
 
-            binding.shoppingListTitleTextView.text = shoppingList.title
+            binding.shoppingListTitleTextView.text = CalculationUtils
+                    .formatDateFromTimestampToString(shoppingList.timestamp)
             binding.productsQuantityTextView.text = "Groceries done: $boughtProductsQuantity/$allProductsQuantity"
 
             binding.root.setOnClickListener {

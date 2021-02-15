@@ -1,10 +1,8 @@
 package com.example.shoppinglists.presentation.di
 
 import android.app.Application
-import com.example.shoppinglists.domain.usecase.DeleteShoppingListUseCase
-import com.example.shoppinglists.domain.usecase.GetArchivedShoppingListsUseCase
-import com.example.shoppinglists.domain.usecase.GetShoppingListsUseCase
-import com.example.shoppinglists.domain.usecase.GetSpecificShoppingListUseCase
+import com.example.shoppinglists.domain.usecase.*
+import com.example.shoppinglists.presentation.viewmodel.ShoppingListDetailsViewModelFactory
 import com.example.shoppinglists.presentation.viewmodel.ShoppingListsViewModelFactory
 import dagger.Module
 import dagger.Provides
@@ -30,6 +28,24 @@ class FactoryModule {
             getShoppingListsUseCase,
             getArchivedShoppingListsUseCase,
             getSpecificShoppingListUseCase,
+            deleteShoppingListUseCase
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideShoppingListDetailsViewModelFactory(
+        app: Application,
+        addShoppingListUseCase: AddShoppingListUseCase,
+        getSpecificShoppingListUseCase: GetSpecificShoppingListUseCase,
+        editShoppingListUseCase: EditShoppingListUseCase,
+        deleteShoppingListUseCase: DeleteShoppingListUseCase
+    ): ShoppingListDetailsViewModelFactory {
+        return ShoppingListDetailsViewModelFactory(
+            app,
+            addShoppingListUseCase,
+            getSpecificShoppingListUseCase,
+            editShoppingListUseCase,
             deleteShoppingListUseCase
         )
     }

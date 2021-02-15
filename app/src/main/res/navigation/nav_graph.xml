@@ -22,6 +22,9 @@
         <argument
             android:name="selected_shopping_list"
             app:argType="com.example.shoppinglists.data.db.model.ShoppingList" />
+        <argument
+            android:name="shopping_list_operation_type"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/archivedShoppingListsFragment"

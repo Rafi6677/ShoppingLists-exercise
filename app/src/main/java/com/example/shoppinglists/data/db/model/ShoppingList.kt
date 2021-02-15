@@ -10,7 +10,7 @@ import java.io.Serializable
 @Entity(tableName = "shopping_lists")
 data class ShoppingList (
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id: Int,
     @ColumnInfo(name = "title")

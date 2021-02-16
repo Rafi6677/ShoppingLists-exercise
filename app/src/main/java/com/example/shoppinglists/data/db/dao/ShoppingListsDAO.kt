@@ -22,7 +22,4 @@ interface ShoppingListsDAO {
     @Query("SELECT * FROM shopping_lists WHERE is_archive = 0 ORDER BY timestamp DESC")
     fun getShoppingLists(): LiveData<List<ShoppingList>>
 
-    @Query("SELECT * FROM shopping_lists WHERE id LIKE :shoppingListId")
-    fun getSpecificShoppingList(shoppingListId: Int): ShoppingList
-
 }

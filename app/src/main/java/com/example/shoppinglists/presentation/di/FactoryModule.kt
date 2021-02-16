@@ -19,16 +19,12 @@ class FactoryModule {
     fun provideShoppingListsViewModel(
         app: Application,
         getShoppingListsUseCase: GetShoppingListsUseCase,
-        getArchivedShoppingListsUseCase: GetArchivedShoppingListsUseCase,
-        getSpecificShoppingListUseCase: GetSpecificShoppingListUseCase,
-        deleteShoppingListUseCase: DeleteShoppingListUseCase
+        getArchivedShoppingListsUseCase: GetArchivedShoppingListsUseCase
     ): ShoppingListsViewModelFactory {
         return ShoppingListsViewModelFactory(
             app,
             getShoppingListsUseCase,
-            getArchivedShoppingListsUseCase,
-            getSpecificShoppingListUseCase,
-            deleteShoppingListUseCase
+            getArchivedShoppingListsUseCase
         )
     }
 
@@ -37,14 +33,12 @@ class FactoryModule {
     fun provideShoppingListDetailsViewModelFactory(
         app: Application,
         addShoppingListUseCase: AddShoppingListUseCase,
-        getSpecificShoppingListUseCase: GetSpecificShoppingListUseCase,
         editShoppingListUseCase: EditShoppingListUseCase,
         deleteShoppingListUseCase: DeleteShoppingListUseCase
     ): ShoppingListDetailsViewModelFactory {
         return ShoppingListDetailsViewModelFactory(
             app,
             addShoppingListUseCase,
-            getSpecificShoppingListUseCase,
             editShoppingListUseCase,
             deleteShoppingListUseCase
         )

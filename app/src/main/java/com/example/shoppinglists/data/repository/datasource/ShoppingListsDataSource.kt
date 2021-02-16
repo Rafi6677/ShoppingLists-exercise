@@ -10,6 +10,5 @@ interface ShoppingListsDataSource {
     suspend fun updateShoppingListToDB(shoppingList: ShoppingList)
     fun getArchivedShoppingListsFromDB(): LiveData<List<ShoppingList>>
     fun getShoppingListsFromDB(): LiveData<List<ShoppingList>>
-    fun getSpecificShoppingListFromDB(id: Int): ShoppingList
 
 }

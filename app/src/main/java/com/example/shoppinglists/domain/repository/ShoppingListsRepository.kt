@@ -10,6 +10,5 @@ interface ShoppingListsRepository {
     suspend fun editShoppingList(shoppingList: ShoppingList)
     fun getArchivedShoppingLists(): LiveData<List<ShoppingList>>
     fun getShoppingLists(): LiveData<List<ShoppingList>>
-    fun getSpecificShoppingList(id: Int): ShoppingList
 
 }

@@ -7,13 +7,11 @@ import com.example.shoppinglists.data.db.model.ShoppingList
 import com.example.shoppinglists.domain.usecase.AddShoppingListUseCase
 import com.example.shoppinglists.domain.usecase.DeleteShoppingListUseCase
 import com.example.shoppinglists.domain.usecase.EditShoppingListUseCase
-import com.example.shoppinglists.domain.usecase.GetSpecificShoppingListUseCase
 import kotlinx.coroutines.launch
 
 class ShoppingListDetailsViewModel(
     private val app: Application,
     private val addShoppingListUseCase: AddShoppingListUseCase,
-    private val getSpecificShoppingListUseCase: GetSpecificShoppingListUseCase,
     private val editShoppingListUseCase: EditShoppingListUseCase,
     private val deleteShoppingListUseCase: DeleteShoppingListUseCase
 ) : AndroidViewModel(app){
@@ -24,6 +22,10 @@ class ShoppingListDetailsViewModel(
 
     fun updateShoppingList(shoppingList: ShoppingList) = viewModelScope.launch {
         editShoppingListUseCase.execute(shoppingList)
+    }
+
+    fun deleteShoppingList(shoppingList: ShoppingList) = viewModelScope.launch {
+        deleteShoppingListUseCase.execute(shoppingList)
     }
 
 }

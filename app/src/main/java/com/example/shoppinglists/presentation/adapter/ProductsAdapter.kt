@@ -64,23 +64,32 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>
             binding.productNameTextView.text = product.name
             binding.productsQuantityTextView.text = "x${product.quantity}"
 
-            if (shoppingListOperationType == ShoppingListOperationType.Add) {
-                binding.productOperationImageView.setImageResource(R.drawable.ic_delete)
-                binding.productOperationImageView.setOnClickListener {
-                    productOperationButtonClickListener(product)
+            when (shoppingListOperationType) {
+                ShoppingListOperationType.Add,
+                ShoppingListOperationType.Edit -> {
+                    binding.productOperationImageView.setImageResource(R.drawable.ic_delete)
+                    binding.productOperationImageView.setOnClickListener {
+                        productOperationButtonClickListener(product)
+                    }
                 }
-            } else if (shoppingListOperationType == ShoppingListOperationType.ShowDetails) {
-                if (product.isBought) {
-                    binding.productOperationImageView.setImageResource(R.drawable.ic_checked)
-                } else {
-                    binding.productOperationImageView.setImageResource(R.drawable.ic_unchecked)
-                }
+                ShoppingListOperationType.ShowDetails -> {
+                    if (product.isBought) {
+                        binding.productOperationImageView.setImageResource(R.drawable.ic_checked)
+                    } else {
+                        binding.productOperationImageView.setImageResource(R.drawable.ic_unchecked)
+                    }
 
-                binding.productOperationImageView.setOnClickListener {
-                    productOperationButtonClickListener(product)
+                    binding.productOperationImageView.setOnClickListener {
+                        productOperationButtonClickListener(product)
+                    }
                 }
-            } else {
-                binding.productOperationImageView.visibility = View.INVISIBLE
+                ShoppingListOperationType.ShowArchivedDetails -> {
+                    if (product.isBought) {
+                        binding.productOperationImageView.setImageResource(R.drawable.ic_checked)
+                    } else {
+                        binding.productOperationImageView.setImageResource(R.drawable.ic_unchecked)
+                    }
+                }
             }
         }
 

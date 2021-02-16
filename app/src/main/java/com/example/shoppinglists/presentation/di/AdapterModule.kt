@@ -18,6 +18,7 @@ class AdapterModule {
         return ShoppingListsAdapter()
     }
 
+    @Singleton
     @Provides
     fun provideProductsAdapter(): ProductsAdapter {
         return ProductsAdapter()

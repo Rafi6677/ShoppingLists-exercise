@@ -52,12 +52,4 @@ class UseCaseModule {
         return GetShoppingListsUseCase(shoppingListsRepository)
     }
 
-    @Singleton
-    @Provides
-    fun provideGetSpecificShoppingListUseCase(
-        shoppingListsRepository: ShoppingListsRepository
-    ): GetSpecificShoppingListUseCase {
-        return GetSpecificShoppingListUseCase(shoppingListsRepository)
-    }
-
 }

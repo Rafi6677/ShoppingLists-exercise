@@ -23,6 +23,5 @@ class ShoppingListsRepositoryImpl(
 
     override fun getArchivedShoppingLists(): LiveData<List<ShoppingList>> = dataSource.getArchivedShoppingListsFromDB()
     override fun getShoppingLists(): LiveData<List<ShoppingList>> = dataSource.getShoppingListsFromDB()
-    override fun getSpecificShoppingList(id: Int): ShoppingList = dataSource.getSpecificShoppingListFromDB(id)
 
 }

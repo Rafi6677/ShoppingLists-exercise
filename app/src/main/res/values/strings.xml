@@ -10,9 +10,16 @@
     <string name="add_first_product">Add first product to the list</string>
     <string name="set_title">Set shopping list\'s title</string>
     <string name="new_product">New product</string>
+    <string name="edit">Edit</string>
     <string name="save">Save</string>
     <string name="archive">Archive</string>
     <string name="delete">Delete</string>
+    <string name="exit">Exit</string>
     <string name="empty_shopping_list">Shopping list is empty</string>
     <string name="archive_confirmation">Are you sure you want to archive the shopping list?</string>
+    <string name="delete_confirmation">Are you sure you want to delete the shopping list?</string>
+    <string name="exit_confirmation">Are you sure you want to exit without saving?</string>
+    <string name="saved_shopping_list">Shopping list was saved</string>
+    <string name="deleted_shopping_list">Shopping list was deleted</string>
+    <string name="archived_shopping_list">Shopping list was archived</string>
 </resources>

@@ -10,7 +10,6 @@ import java.lang.IllegalArgumentException
 class ShoppingListDetailsViewModelFactory(
     private val app: Application,
     private val addShoppingListUseCase: AddShoppingListUseCase,
-    private val getSpecificShoppingListUseCase: GetSpecificShoppingListUseCase,
     private val editShoppingListUseCase: EditShoppingListUseCase,
     private val deleteShoppingListUseCase: DeleteShoppingListUseCase
 ) : ViewModelProvider.Factory {
@@ -20,7 +19,6 @@ class ShoppingListDetailsViewModelFactory(
             return ShoppingListDetailsViewModel(
                 app,
                 addShoppingListUseCase,
-                getSpecificShoppingListUseCase,
                 editShoppingListUseCase,
                 deleteShoppingListUseCase
             ) as T

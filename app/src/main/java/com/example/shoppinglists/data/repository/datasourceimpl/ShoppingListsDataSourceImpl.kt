@@ -30,6 +30,5 @@ class ShoppingListsDataSourceImpl(private val dao: ShoppingListsDAO) : ShoppingL
 
     override fun getArchivedShoppingListsFromDB(): LiveData<List<ShoppingList>> = dao.getArchivedShoppingLists()
     override fun getShoppingListsFromDB(): LiveData<List<ShoppingList>> = dao.getShoppingLists()
-    override fun getSpecificShoppingListFromDB(id: Int): ShoppingList = dao.getSpecificShoppingList(id)
 
 }

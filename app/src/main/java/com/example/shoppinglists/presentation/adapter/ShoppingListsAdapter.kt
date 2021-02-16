@@ -56,7 +56,7 @@ class ShoppingListsAdapter : RecyclerView.Adapter<ShoppingListsAdapter.ShoppingL
         @SuppressLint("SetTextI18n")
         fun bind(shoppingList: ShoppingList) {
             val allProductsQuantity = shoppingList.productsList.size
-            val boughtProductsQuantity = CalculationUtils.countBoughtProducts(shoppingList)
+            val boughtProductsQuantity = CalculationUtils.countBoughtProducts(shoppingList.productsList)
 
             binding.shoppingListTitleTextView.text = CalculationUtils
                     .formatDateFromTimestampToString(shoppingList.timestamp)

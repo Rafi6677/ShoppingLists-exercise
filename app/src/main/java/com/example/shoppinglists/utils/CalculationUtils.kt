@@ -1,16 +1,16 @@
 package com.example.shoppinglists.utils
 
 import android.annotation.SuppressLint
-import com.example.shoppinglists.data.db.model.ShoppingList
+import com.example.shoppinglists.data.db.model.Product
 import java.text.SimpleDateFormat
 import java.util.*
 
 object CalculationUtils {
 
-    fun countBoughtProducts(shoppingList: ShoppingList): Int {
+    fun countBoughtProducts(productsList: List<Product>): Int {
         var boughtProducts = 0
 
-        for (product in shoppingList.productsList) {
+        for (product in productsList) {
             if (product.isBought) {
                 boughtProducts++
             }

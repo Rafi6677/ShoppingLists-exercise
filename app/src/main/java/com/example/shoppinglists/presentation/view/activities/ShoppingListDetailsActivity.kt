@@ -80,7 +80,17 @@ class ShoppingListDetailsActivity : AppCompatActivity() {
 
         adapter.setOperationType(shoppingListOperationType)
 
-        if (shoppingListOperationType == ShoppingListOperationType.ShowDetails) {
+        if (shoppingListOperationType == ShoppingListOperationType.Add) {
+            adapter.setProductOperationButtonClickListener {
+                deleteProduct(it)
+            }
+        } else if (shoppingListOperationType == ShoppingListOperationType.ShowDetails) {
+            shoppingList = bundle.getSerializable("shopping_list") as ShoppingList
+            adapter.setProductOperationButtonClickListener {
+                changeProductState(it)
+            }
+            adapter.setProductsList(shoppingList.productsList)
+        } else if (shoppingListOperationType == ShoppingListOperationType.ShowArchivedDetails) {
             shoppingList = bundle.getSerializable("shopping_list") as ShoppingList
             adapter.setProductsList(shoppingList.productsList)
         }
@@ -139,10 +149,23 @@ class ShoppingListDetailsActivity : AppCompatActivity() {
                 .show()
         } else {
             val product = Product(name, quantity, false)
-            adapter.addProduct(product)
+            adapter.getProductsList().add(product)
             manageAddFirstProductInfoVisibility()
             adapter.notifyDataSetChanged()
         }
+    }
+
+    private fun deleteProduct(product: Product) {
+        adapter.getProductsList().remove(product)
+        adapter.notifyDataSetChanged()
+        manageAddFirstProductInfoVisibility()
+    }
+
+    private fun changeProductState(product: Product) {
+        val isBought = product.isBought
+        val productIndex = adapter.getProductsList().indexOf(product)
+        adapter.getProductsList()[productIndex].isBought = !isBought
+        adapter.notifyDataSetChanged()
     }
 
     private fun saveShoppingList() {
@@ -157,10 +180,16 @@ class ShoppingListDetailsActivity : AppCompatActivity() {
         }
 
         val timestamp = Date().time
-        val shoppingList = ShoppingList(0, products, timestamp, false)
 
-        viewModel.saveShoppingList(shoppingList)
-        finish()
+        if (shoppingListOperationType == ShoppingListOperationType.Add) {
+            val shoppingList = ShoppingList(0, products, timestamp, false)
+            viewModel.saveShoppingList(shoppingList)
+            finish()
+        } else if (shoppingListOperationType == ShoppingListOperationType.ShowDetails) {
+            val shoppingList = ShoppingList(this.shoppingList.id, products, timestamp, false)
+            viewModel.saveShoppingList(shoppingList)
+            finish()
+        }
     }
 
     private fun archiveShoppingList() {

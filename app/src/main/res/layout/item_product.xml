@@ -47,12 +47,11 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/is_bought_imageView"
+        android:id="@+id/product_operation_imageView"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:src="@drawable/ic_unchecked"
-        app:tint="@color/colorPrimary"
         android:contentDescription="checkBoxImage" />
 
 </LinearLayout>

@@ -15,7 +15,7 @@
         android:background="@color/colorPrimary"
         app:itemTextColor="@color/background"
         app:itemIconTint="@color/background"
-        app:menu="@menu/main_menu" />
+        app:menu="@menu/home_menu" />
 
     <fragment
         android:id="@+id/fragment"

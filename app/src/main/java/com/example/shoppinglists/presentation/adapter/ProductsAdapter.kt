@@ -14,6 +14,11 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>
 
     private val productsList = ArrayList<Product>()
     private lateinit var shoppingListOperationType: ShoppingListOperationType
+    private lateinit var productOperationButtonClickListener: (Product)->Unit
+
+    fun setOperationType(shoppingListOperationType: ShoppingListOperationType) {
+        this.shoppingListOperationType = shoppingListOperationType
+    }
 
     fun setProductsList(productsList: List<Product>?) {
         this.productsList.clear()
@@ -23,16 +28,12 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>
         }
     }
 
-    fun getProductsList(): List<Product> {
+    fun getProductsList(): ArrayList<Product> {
         return productsList
     }
 
-    fun setOperationType(shoppingListOperationType: ShoppingListOperationType) {
-        this.shoppingListOperationType = shoppingListOperationType
-    }
-
-    fun addProduct(product: Product) {
-        this.productsList.add(product)
+    fun setProductOperationButtonClickListener(clickListener: (Product)->Unit) {
+        productOperationButtonClickListener = clickListener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsViewHolder {
@@ -64,13 +65,22 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>
             binding.productsQuantityTextView.text = "x${product.quantity}"
 
             if (shoppingListOperationType == ShoppingListOperationType.Add) {
-                binding.isBoughtImageView.visibility = View.GONE
-            } else {
-                if (product.isBought) {
-                binding.isBoughtImageView.setImageResource(R.drawable.ic_checked)
-                } else {
-                    binding.isBoughtImageView.setImageResource(R.drawable.ic_unchecked)
+                binding.productOperationImageView.setImageResource(R.drawable.ic_delete)
+                binding.productOperationImageView.setOnClickListener {
+                    productOperationButtonClickListener(product)
                 }
+            } else if (shoppingListOperationType == ShoppingListOperationType.ShowDetails) {
+                if (product.isBought) {
+                    binding.productOperationImageView.setImageResource(R.drawable.ic_checked)
+                } else {
+                    binding.productOperationImageView.setImageResource(R.drawable.ic_unchecked)
+                }
+
+                binding.productOperationImageView.setOnClickListener {
+                    productOperationButtonClickListener(product)
+                }
+            } else {
+                binding.productOperationImageView.visibility = View.INVISIBLE
             }
         }
 

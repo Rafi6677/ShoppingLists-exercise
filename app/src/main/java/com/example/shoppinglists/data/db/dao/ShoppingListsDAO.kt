@@ -7,7 +7,7 @@ import com.example.shoppinglists.data.db.model.ShoppingList
 @Dao
 interface ShoppingListsDAO {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertShoppingList(shoppingList: ShoppingList): Long
 
     @Update

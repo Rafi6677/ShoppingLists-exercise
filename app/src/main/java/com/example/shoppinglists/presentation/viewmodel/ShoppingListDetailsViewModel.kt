@@ -22,4 +22,8 @@ class ShoppingListDetailsViewModel(
         addShoppingListUseCase.execute(shoppingList)
     }
 
+    fun updateShoppingList(shoppingList: ShoppingList) = viewModelScope.launch {
+        editShoppingListUseCase.execute(shoppingList)
+    }
+
 }

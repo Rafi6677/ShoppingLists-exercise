@@ -12,8 +12,6 @@ data class ShoppingList (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id: Int,
-    @ColumnInfo(name = "title")
-    val title: String,
     @TypeConverters(DataConverter::class)
     @ColumnInfo(name = "products")
     val productsList: List<Product>,

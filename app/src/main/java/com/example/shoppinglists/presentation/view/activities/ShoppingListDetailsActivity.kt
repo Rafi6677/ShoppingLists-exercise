@@ -41,6 +41,7 @@ class ShoppingListDetailsActivity : AppCompatActivity() {
     @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.title = resources.getString(R.string.shopping_list)
         supportActionBar?.setDefaultDisplayHomeAsUpEnabled(true)
 
         binding = ActivityShoppingListDetailsBinding.inflate(layoutInflater)
@@ -57,7 +58,7 @@ class ShoppingListDetailsActivity : AppCompatActivity() {
         inflater.inflate(R.menu.shopping_list_details_menu, menu)
 
         if (menu != null && shoppingListOperationType == ShoppingListOperationType.Add) {
-            menu.findItem(R.id.menu_delete).isVisible = false
+            menu.findItem(R.id.menu_archive).isVisible = false
         }
 
         return true
@@ -66,7 +67,7 @@ class ShoppingListDetailsActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_save -> saveShoppingList()
-            R.id.menu_delete -> deleteShoppingList()
+            R.id.menu_archive -> archiveShoppingList()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -117,7 +118,7 @@ class ShoppingListDetailsActivity : AppCompatActivity() {
                 minValue = 1
                 maxValue = 100
             }
-            val builder = AlertDialog.Builder(this).apply {
+            AlertDialog.Builder(this).apply {
                 setTitle(resources.getString(R.string.new_product))
                 setView(dialogLayout)
                 setPositiveButton("Add") { _, _ ->
@@ -127,9 +128,8 @@ class ShoppingListDetailsActivity : AppCompatActivity() {
                     )
                 }
                 setNegativeButton("Cancel") { _, _ -> }
+                create().show()
             }
-            val dialog = builder.create()
-            dialog.show()
         }
     }
 
@@ -157,14 +157,29 @@ class ShoppingListDetailsActivity : AppCompatActivity() {
         }
 
         val timestamp = Date().time
-        val shoppingList = ShoppingList(0, "title", products, timestamp, false)
+        val shoppingList = ShoppingList(0, products, timestamp, false)
 
         viewModel.saveShoppingList(shoppingList)
         finish()
     }
 
-    private fun deleteShoppingList() {
-
+    private fun archiveShoppingList() {
+        AlertDialog.Builder(this).apply {
+            setTitle(resources.getString(R.string.archive))
+            setMessage(resources.getString(R.string.archive_confirmation))
+            setPositiveButton("Yes") { _, _ ->
+                val archivedShoppingList = ShoppingList(
+                    shoppingList.id,
+                    shoppingList.productsList,
+                    shoppingList.timestamp,
+                    true
+                )
+                viewModel.updateShoppingList(archivedShoppingList)
+                finish()
+            }
+            setNegativeButton("Cancel") {_,_-> }
+            create().show()
+        }
     }
 
 }

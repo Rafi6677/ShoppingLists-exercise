@@ -75,15 +75,16 @@ class ShoppingListsFragment : Fragment() {
     }
 
     private fun displayShoppingLists() {
+        hideNoDataInfo()
         showProgressBar()
 
         viewModel.shoppingLists.observe(viewLifecycleOwner, {
-            if (it != null && it.isNotEmpty()) {
-                adapter.differ.submitList(it)
-                hideProgressBar()
+            adapter.differ.submitList(it)
+            hideProgressBar()
+
+            if (it.isNotEmpty()) {
                 hideNoDataInfo()
             } else {
-                hideProgressBar()
                 showNoDataInfo()
             }
         })

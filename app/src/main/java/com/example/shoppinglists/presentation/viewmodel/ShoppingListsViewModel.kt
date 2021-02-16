@@ -16,5 +16,6 @@ class ShoppingListsViewModel(
 ) : AndroidViewModel(app) {
 
     val shoppingLists = getShoppingListsUseCase.execute()
+    val archivedShoppingLists = getArchivedShoppingListsUseCase.execute()
 
 }

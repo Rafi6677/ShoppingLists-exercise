@@ -11,6 +11,8 @@
     <string name="set_title">Set shopping list\'s title</string>
     <string name="new_product">New product</string>
     <string name="save">Save</string>
+    <string name="archive">Archive</string>
     <string name="delete">Delete</string>
     <string name="empty_shopping_list">Shopping list is empty</string>
+    <string name="archive_confirmation">Are you sure you want to archive the shopping list?</string>
 </resources>
